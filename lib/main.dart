@@ -16,6 +16,7 @@ import 'screens/home_screen.dart';
 import 'screens/search_screen.dart';
 import 'screens/library_screen.dart';
 import 'screens/profile_screen.dart';
+import 'screens/splash_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,7 +71,7 @@ class MyApp extends StatelessWidget {
       ),
     ],
     child: MaterialApp(
-      title: 'OnlyVocals4U',
+      title: 'Tarteel – Pure Voices. Pure Soul.',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
@@ -155,10 +156,10 @@ class MyApp extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      home: user != null
-    ? MainScreen()
-    : const LoginScreen(),
-      // home: LoginScreen(),
+    //   home: user != null
+    // ? MainScreen()
+    // : const LoginScreen(),
+      home: const SplashScreen(),
     )
    );
   }

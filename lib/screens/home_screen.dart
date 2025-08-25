@@ -5,10 +5,12 @@ import 'package:only_vocal/resources/user_provider.dart';
 import 'package:provider/provider.dart';
 import '../data/mock_data.dart';
 import '../models/genre.dart';
+import '../models/guidance_for_the_heart.dart';
 import '../models/user.dart' as ModelUser;
 import '../models/song.dart';
 import 'genre_detail_screen.dart';
 import 'full_player_screen.dart';
+import 'guidance_for_the_heart_details.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -167,30 +169,59 @@ print('Doneeee');
                 ),
               ),
 
-              // Liked Songs Slider
+              // // Liked Songs Slider
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              //   child: Text(
+              //     'Your Favorites',
+              //     style: Theme.of(context).textTheme.headlineSmall,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 120,
+              //   child: ListView.builder(
+              //     padding: const EdgeInsets.all(16.0),
+              //     scrollDirection: Axis.horizontal,
+              //     itemCount: MockData.likedSongs.length + 1, // +1 for "See All"
+              //     itemBuilder: (context, index) {
+              //       if (index == MockData.likedSongs.length) {
+              //         return _buildSeeAllItem(context);
+              //       }
+              //       final song = MockData.likedSongs[index];
+              //       return _buildLikedSongItem(context, song);
+              //     },
+              //   ),
+              // ),
+
+
+              // Genre Grid
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
-                  'Your Favorites',
+                  'Guidance for the Heart',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
-              SizedBox(
-                height: 120,
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(16.0),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: MockData.likedSongs.length + 1, // +1 for "See All"
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 1.5,
+                  ),
+                  itemCount: MockData.guidanceForTheHeart.length,
                   itemBuilder: (context, index) {
-                    if (index == MockData.likedSongs.length) {
-                      return _buildSeeAllItem(context);
-                    }
-                    final song = MockData.likedSongs[index];
-                    return _buildLikedSongItem(context, song);
+                    final genre = MockData.guidanceForTheHeart[index];
+                    final guidanceForTheHeartList = MockData.guidanceForTheHeart[index];
+                    return _buildGuidanceForTheHeart(context, guidanceForTheHeartList);
                   },
                 ),
               ),
-
               // Bottom padding to account for mini player
               const SizedBox(height: 70),
             ],
@@ -313,6 +344,76 @@ print('Doneeee');
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGuidanceForTheHeart(BuildContext context, GuidanceForTheHeart guidanceForTheHeartList) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => GuidanceForTheHeartDetails(guidanceForTheHeart: guidanceForTheHeartList),
+          ),
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              guidanceForTheHeartList.color,
+              guidanceForTheHeartList.color.withOpacity(0.7),
+            ],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Opacity(
+                  opacity: 0.2,
+                  child: Image.asset(
+                    guidanceForTheHeartList.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    guidanceForTheHeartList.icon,
+                    color: Colors.white,
+                    size: 32,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    guidanceForTheHeartList.name,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
