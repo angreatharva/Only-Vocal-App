@@ -219,8 +219,8 @@ static List<Song> likedSongs = [
 
   static List<GuidanceForTheHeart> guidanceForTheHeart = [
     GuidanceForTheHeart(
-      id: 'scholars_corner',
-      name: 'Scholar\'s Corner' ,
+      id: 'islamic_lectures',
+      name: 'Islamic Lectures' ,
       color: Colors.lightGreen,
       icon: Icons.album,
       imageUrl: 'assets/genres/electronic.jpeg',
@@ -244,7 +244,9 @@ static List<Song> likedSongs = [
             id: 'quran_stories',
             name: 'Quran Stories',
             videoUrls: [
-
+              'https://www.youtube.com/live/LDJyw4Pgws4?si=DaG0BZhXVB_SX-X8'
+              'https://youtu.be/d2D6WuKlymM?si=AVNbkyRyOJRGkHkh',
+              'https://youtu.be/xxnZuAHCAjY?si=6Z5-CL6FiC24eRPR',
             ]
         ),
         GuidanceCategory(
@@ -273,6 +275,9 @@ static List<Song> likedSongs = [
             id: 'dua_adab',
             name: 'Dua & Adab',
             videoUrls: [
+              'https://youtu.be/u2e2Uk4qEXs?si=Ue_xhi-xl-RL-RVO',
+              'https://youtu.be/llz1efYNTxs?si=J338qvrpmNVUU72s',
+              'https://youtu.be/UKmZLEEexiQ?si=8PbHP-mixg78BoLR',
             ]
         ),
       ],

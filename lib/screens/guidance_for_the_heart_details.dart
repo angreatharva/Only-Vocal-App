@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import '../data/mock_data.dart';
 import '../models/genre.dart';
@@ -20,11 +22,9 @@ class _GuidanceForTheHeartDetailsState extends State<GuidanceForTheHeartDetails>
   
   @override
   Widget build(BuildContext context) {
+    print("_GuidanceForTheHeartDetailsScreen");
     return SafeArea(
-      
       child: Scaffold(
-
-
         body: CustomScrollView(
           slivers: [
             // App Bar
@@ -68,10 +68,10 @@ class _GuidanceForTheHeartDetailsState extends State<GuidanceForTheHeartDetails>
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  child: Text(
-                    'Categories',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
+                  // child: Text(
+                  //   'Categories',
+                  //   style: Theme.of(context).textTheme.headlineSmall,
+                  // ),
                 ),
               ),
             if (widget.guidanceForTheHeart.categories.isNotEmpty)
@@ -98,7 +98,7 @@ class _GuidanceForTheHeartDetailsState extends State<GuidanceForTheHeartDetails>
                 padding: const EdgeInsets.all(16.0),
                 sliver: SliverGrid(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                    crossAxisCount: 1,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                     childAspectRatio: 1.2,
@@ -183,88 +183,10 @@ class _GuidanceForTheHeartDetailsState extends State<GuidanceForTheHeartDetails>
     );
   }
   Widget _buildVideoTile(BuildContext context, String url, int index) {
-    final videoId = _extractYouTubeId(url);
-    final thumbUrl = videoId != null
-        ? 'https://img.youtube.com/vi/$videoId/hqdefault.jpg'
-        : null;
-    final title = MockData.videoTitles[url] ?? 'Video ${index + 1}';
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WebViewScreen(url: url, title: title),
-          ),
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              widget.guidanceForTheHeart.color,
-              widget.guidanceForTheHeart.color.withOpacity(0.7),
-            ],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: thumbUrl != null
-                    ? Image.network(thumbUrl, fit: BoxFit.cover)
-                    : Opacity(
-                        opacity: 0.2,
-                        child: Image.asset(
-                          widget.guidanceForTheHeart.imageUrl,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.5),
-                  ],
-                ),
-              ),
-            ),
-            Center(
-              child: Icon(Icons.play_circle_fill, color: Colors.white.withOpacity(0.9), size: 48),
-            ),
-            Positioned(
-              left: 12,
-              right: 12,
-              bottom: 12,
-              child: Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ),
-          ],
-        ),
-      ),
+    return _YouTubeTile(
+      url: url,
+      color: widget.guidanceForTheHeart.color,
+      fallbackImage: widget.guidanceForTheHeart.imageUrl,
     );
   }
 
@@ -333,7 +255,7 @@ class _CategoryDetailsScreen extends StatelessWidget {
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 1,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
           childAspectRatio: 1.2,
@@ -341,74 +263,193 @@ class _CategoryDetailsScreen extends StatelessWidget {
         itemCount: videoUrls.length,
         itemBuilder: (context, index) {
           final url = videoUrls[index];
-          final videoId = _extractYouTubeId(url);
-          final thumbUrl = videoId != null ? 'https://img.youtube.com/vi/$videoId/hqdefault.jpg' : null;
-          return GestureDetector(
+          return _YouTubeTile(
+            url: url,
+            color: color,
+            fallbackImage: fallbackImage,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _YouTubeTile extends StatefulWidget {
+  final String url;
+  final Color color;
+  final String fallbackImage;
+
+  const _YouTubeTile({required this.url, required this.color, required this.fallbackImage});
+
+  @override
+  State<_YouTubeTile> createState() => _YouTubeTileState();
+}
+
+class _YouTubeTileState extends State<_YouTubeTile> {
+  String _title = '';
+  String? _thumbUrl;
+  bool _isLiked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initData();
+  }
+
+  Future<void> _initData() async {
+    final cached = MockData.videoTitles[widget.url];
+    if (cached != null && cached.isNotEmpty) {
+      setState(() => _title = cached);
+    } else {
+      final fetched = await _fetchYouTubeTitle(widget.url);
+      if (!mounted) return;
+      if (fetched != null && fetched.isNotEmpty) {
+        setState(() => _title = fetched);
+        MockData.videoTitles[widget.url] = fetched;
+      }
+    }
+    final videoId = _extractYouTubeId(widget.url);
+    if (videoId != null) {
+      setState(() => _thumbUrl = 'https://img.youtube.com/vi/$videoId/hqdefault.jpg');
+    }
+  }
+
+  Future<String?> _fetchYouTubeTitle(String videoUrl) async {
+    try {
+      final Uri endpoint = Uri.parse('https://www.youtube.com/oembed?format=json&url=${Uri.encodeComponent(videoUrl)}');
+      final res = await http.get(endpoint);
+      if (res.statusCode == 200) {
+        final data = json.decode(res.body) as Map<String, dynamic>;
+        final dynamic t = data['title'];
+        if (t is String) return t.trim();
+      }
+    } catch (_) {}
+    return null;
+  }
+
+  String? _extractYouTubeId(String url) {
+    try {
+      final uri = Uri.parse(url);
+      if (uri.host.contains('youtu.be')) {
+        return uri.pathSegments.isNotEmpty ? uri.pathSegments.last : null;
+      }
+      if (uri.host.contains('youtube.com')) {
+        if (uri.path == '/watch') {
+          return uri.queryParameters['v'];
+        }
+        if (uri.pathSegments.contains('embed')) {
+          return uri.pathSegments.last;
+        }
+      }
+      return null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1E3F),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => WebViewScreen(url: url, title: MockData.videoTitles[url] ?? '$title • Video ${index + 1}'),
+                  builder: (context) => WebViewScreen(url: widget.url),
                 ),
               );
             },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    color,
-                    color.withOpacity(0.7),
-                  ],
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    topRight: Radius.circular(12),
                   ),
-                ],
-              ),
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: thumbUrl != null
-                          ? Image.network(thumbUrl, fit: BoxFit.cover)
-                          : Opacity(
-                              opacity: 0.2,
-                              child: Image.asset(
-                                fallbackImage,
-                                fit: BoxFit.cover,
-                              ),
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: _thumbUrl != null
+                        ? Image.network(_thumbUrl!, fit: BoxFit.cover)
+                        : Opacity(
+                            opacity: 0.2,
+                            child: Image.asset(
+                              widget.fallbackImage,
+                              fit: BoxFit.cover,
                             ),
-                    ),
-                  ),
-                  Center(
-                    child: Icon(Icons.play_circle_fill, color: Colors.white.withOpacity(0.9), size: 48),
-                  ),
-                  Positioned(
-                    left: 12,
-                    right: 12,
-                    bottom: 12,
-                    child: Text(
-                      'Video ${index + 1}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
                           ),
+                  ),
+                ),
+                Positioned.fill(
+                  child: IgnorePointer(
+                    child: Center(
+                      child: Icon(Icons.play_circle_fill, color: Colors.white.withOpacity(0.9), size: 48),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    _title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _isLiked = !_isLiked;
+                    });
+                    if (_isLiked) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Added to liked'),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    }
+                    else{
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Removed from liked'),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    }
+                  },
+                  icon: Icon(_isLiked ? Icons.favorite : Icons.favorite_border),
+                  color: _isLiked ? Colors.red : Colors.white,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

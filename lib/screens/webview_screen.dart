@@ -5,9 +5,13 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 class WebViewScreen extends StatefulWidget {
   final String url;
-  final String? title;
+  // final String? title;
 
-  const WebViewScreen({super.key, required this.url, this.title});
+  const WebViewScreen({
+    super.key,
+    required this.url,
+    // this.title
+  });
 
   @override
   State<WebViewScreen> createState() => _WebViewScreenState();
@@ -48,7 +52,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title ?? 'Video'),
+        // title: Text(widget.title ?? 'Video'),
       ),
       body: Stack(
         children: [

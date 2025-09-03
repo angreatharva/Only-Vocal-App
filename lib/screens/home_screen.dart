@@ -11,6 +11,8 @@ import '../models/song.dart';
 import 'genre_detail_screen.dart';
 import 'full_player_screen.dart';
 import 'guidance_for_the_heart_details.dart';
+import 'search_screen.dart';
+import 'features_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -39,69 +41,32 @@ if (customUser != null) {
 print('Doneeee');
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Qalberooh',
+          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                color: const Color.fromARGB(255, 156, 98, 167),
+              ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SearchScreen(),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'OnlyVocals4U',
-                      style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                            color: const Color.fromARGB(255, 156, 98, 167),
-                          ),
-                    ),
-                    // const Icon(
-                    //   Icons.notifications,
-                    //   color: Colors.white,
-                    // ),
-                  ],
-                ),
-              ),
-
-              // Greeting
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  // 'Hey, user',
-                  customUser != null ? 'Hey, ${customUser.username}' : 'Hey there!',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-
-              // Search Bar
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1A1E3F),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Search for songs, artists, or albums',
-                      hintStyle: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 16,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
               Center(
                 child: CarouselSlider.builder(
                   options: CarouselOptions(
@@ -121,12 +86,66 @@ print('Doneeee');
               ),
 
               SizedBox(height:20),
+
+              // Your Features Section
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          'Your Features',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FeaturesScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'View All',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: const Color(0xFFFFD700),
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 12),
+              SizedBox(
+                height: 110,
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    _buildFeatureItem(context, Icons.explore, 'Qibla'),
+                    const SizedBox(width: 16),
+                    _buildFeatureItem(context, Icons.pan_tool_alt, 'Duas'),
+                    const SizedBox(width: 16),
+                    _buildFeatureItem(context, Icons.bubble_chart, 'Tasbih'),
+                    const SizedBox(width: 16),
+                    _buildFeatureItem(context, Icons.menu_book, 'Journal'),
+                  ],
+                ),
+              ),
+
               // Recently Played Section
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   'Recently Played',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
               SizedBox(
@@ -146,8 +165,8 @@ print('Doneeee');
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
-                  'Browse Genres',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  'Capella Songs',
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
               Padding(
@@ -200,7 +219,7 @@ print('Doneeee');
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   'Guidance for the Heart',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
               Padding(
@@ -238,6 +257,39 @@ print('Doneeee');
       fit:BoxFit.cover,
     )
   );
+  Widget _buildFeatureItem(BuildContext context, IconData icon, String label) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: 64,
+          height: 64,
+          decoration: BoxDecoration(
+            color: const Color(0xFF1A1E3F),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 28,
+          ),
+        ),
+        const SizedBox(height: 8),
+        SizedBox(
+          width: 72,
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Colors.white.withOpacity(0.9),
+                ),
+          ),
+        ),
+      ],
+    );
+  }
   Widget _buildRecentlyPlayedItem(BuildContext context, Song song) {
     return GestureDetector(
       onTap: () {

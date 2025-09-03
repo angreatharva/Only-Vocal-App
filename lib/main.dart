@@ -10,10 +10,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:only_vocal/screens/rating_screen.dart';
+import 'package:only_vocal/screens/ask_abdul_screen.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'screens/search_screen.dart';
+import 'screens/videos_screen.dart';
 import 'screens/library_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/splash_screen.dart';
@@ -182,10 +183,11 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    const SearchScreen(),
     const LibraryScreen(),
+    const VideosScreen(),
+    
+    const AskAbdulScreen(),
     ProfileScreen(),
-    RatingScreen()
   ];
 
     @override
@@ -226,21 +228,22 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+            icon: Icon(Icons.library_music),
+            label: 'Capella Songs',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.library_music),
-            label: 'Library',
+            icon: Icon(Icons.ondemand_video),
+            label: 'Videos',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline),
+            label: 'Ask Abdul',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.rate_review_outlined),
-            label: 'Rate Us',
-          ),
+          
         ],
       ),
     );
