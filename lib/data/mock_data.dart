@@ -314,20 +314,134 @@ static List<Song> likedSongs = [
   ];
 
   static List<Song> genreSongs(String genreId) {
-    // Return a list of songs for a specific genre
-    return List.generate(
-      20,
-      (index) => Song(
-        id: index,
-        title: 'Song ${index + 1}',
-        artist: 'Artist ${index % 5 + 1}',
-        album: 'Album ${index % 3 + 1}',
-        // albumArt: 'https://via.placeholder.com/300/1A1E3F/FFFFFF?text=Song+${index + 1}',
-        albumArt: 'assets/images/song.jpeg',
-        audioURL: 'audio/levitating.mp3',
-        isLiked: index % 3 == 0,
-      ),
-    );
+    switch (genreId) {
+      case 'bollywood':
+        return [
+          Song(
+            id: 100,
+            title: 'Levitating (Bollywood Mix)',
+            artist: 'Dua Lipa',
+            album: 'Future Nostalgia',
+            albumArt: 'assets/thumbnails/levitating.jpeg',
+            audioURL: 'audio/levitating.mp3',
+            isLiked: true,
+          ),
+          Song(
+            id: 101,
+            title: 'Bohemian Rhapsody (Hindi Version)',
+            artist: 'Queen',
+            album: 'A Night at the Opera',
+            albumArt: 'assets/thumbnails/bohemian.jpeg',
+            audioURL: 'audio/bohemian.mp3',
+          ),
+          Song(
+            id: 102,
+            title: 'Summertime Bollywood',
+            artist: 'Ella Fitzgerald & Louis Armstrong',
+            album: 'Porgy and Bess',
+            albumArt: 'assets/thumbnails/summertime.jpeg',
+            audioURL: 'audio/summertime.mp3',
+            isLiked: true,
+          ),
+          Song(
+            id: 103,
+            title: 'HUMBLE. (Desi Mix)',
+            artist: 'Kendrick Lamar',
+            album: 'DAMN.',
+            albumArt: 'assets/thumbnails/humble.jpeg',
+            audioURL: 'audio/humble.mp3',
+          ),
+        ];
+      
+      case 'hollywood':
+        return [
+          Song(
+            id: 200,
+            title: 'As It Was',
+            artist: 'Harry Styles',
+            album: 'Harry\'s House',
+            albumArt: 'assets/thumbnails/as_it_was.jpeg',
+            audioURL: 'audio/as-it-was.mp3',
+            isLiked: true,
+          ),
+          Song(
+            id: 201,
+            title: 'In The End',
+            artist: 'Linkin Park',
+            album: 'Hybrid Theory',
+            albumArt: 'assets/thumbnails/in_the_end.jpeg',
+            audioURL: 'audio/in-the-end.mp3',
+          ),
+          Song(
+            id: 202,
+            title: 'SICKO MODE',
+            artist: 'Travis Scott',
+            album: 'ASTROWORLD',
+            albumArt: 'assets/thumbnails/sicko_mode.jpeg',
+            audioURL: 'audio/sicko-mode.mp3',
+            isLiked: true,
+          ),
+          Song(
+            id: 203,
+            title: 'Lose Yourself',
+            artist: 'Eminem',
+            album: '8 Mile',
+            albumArt: 'assets/thumbnails/lose_yourself.jpeg',
+            audioURL: 'audio/lose-yourself.mp3',
+          ),
+        ];
+      
+      case 'artist':
+        return [
+          Song(
+            id: 300,
+            title: 'Bohemian Rhapsody',
+            artist: 'Queen',
+            album: 'A Night at the Opera',
+            albumArt: 'assets/thumbnails/bohemian.jpeg',
+            audioURL: 'audio/bohemian.mp3',
+            isLiked: true,
+          ),
+          Song(
+            id: 301,
+            title: 'My Favourite Things',
+            artist: 'John Coltrane',
+            album: 'My Favorite Things',
+            albumArt: 'assets/thumbnails/my_favourite.jpeg',
+            audioURL: 'audio/summertime.mp3',
+          ),
+          Song(
+            id: 302,
+            title: 'So What',
+            artist: 'Miles Davis',
+            album: 'Kind of Blue',
+            albumArt: 'assets/thumbnails/so_what.jpeg',
+            audioURL: 'audio/levitating.mp3',
+          ),
+          Song(
+            id: 303,
+            title: 'Back In Black',
+            artist: 'AC/DC',
+            album: 'Back In Black',
+            albumArt: 'assets/thumbnails/back_in_black.jpeg',
+            audioURL: 'audio/in-the-end.mp3',
+            isLiked: true,
+          ),
+        ];
+      
+      default:
+        // Fallback for any other genre
+        return [
+          Song(
+            id: 999,
+            title: 'Default Song',
+            artist: 'Unknown Artist',
+            album: 'Unknown Album',
+            albumArt: 'assets/images/song.jpeg',
+            audioURL: 'audio/levitating.mp3',
+          ),
+        ];
+    }
   }
 
   static Song currentlyPlaying = Song(

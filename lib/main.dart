@@ -132,13 +132,13 @@ class MyApp extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        cardTheme: CardTheme(
-          color: const Color(0xFF1A1E3F),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          elevation: 4,
-        ),
+        // cardTheme: CardTheme(
+        //   color: const Color(0xFF1A1E3F),
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(8),
+        //   ),
+        //   elevation: 4,
+        // ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFFFFD700),
