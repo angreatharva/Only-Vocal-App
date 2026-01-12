@@ -44,8 +44,17 @@ dependencies:
   firebase_storage: ^12.4.7
   audioplayers: ^6.5.0
   carousel_slider: ^5.1.1
+  webview_flutter: ^4.10.0
+  http: ^1.2.2
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.4
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app.png"
+  
   flutter_test:
     sdk: flutter
 
@@ -101,3 +110,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+

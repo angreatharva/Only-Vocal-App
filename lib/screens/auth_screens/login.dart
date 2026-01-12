@@ -1,10 +1,8 @@
 import 'package:only_vocal/components/colors.dart';
 import 'package:only_vocal/components/text_field_input.dart';
 import 'package:only_vocal/main.dart';
-import 'package:only_vocal/models/song.dart';
 import 'package:only_vocal/resources/auth_methods.dart';
 import 'package:only_vocal/resources/user_provider.dart';
-import 'package:only_vocal/screens/home_screen.dart';
 import 'package:only_vocal/screens/auth_screens/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

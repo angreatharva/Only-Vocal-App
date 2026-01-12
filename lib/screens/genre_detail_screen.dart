@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:only_vocal/components/colors.dart';
 import '../models/genre.dart';
 import '../data/mock_data.dart';
 import 'full_player_screen.dart';
@@ -75,8 +76,13 @@ class GenreDetailScreen extends StatelessWidget {
                           width: 160,
                           margin: const EdgeInsets.only(right: 16),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1A1E3F),
+                            // color: const Color(0xFF1A1E3F),
+                            color: AppColors.background,
                             borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: AppColors.primary, // Set your desired border color here
+                              width: 2, // Optional: set border thickness
+                            ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.2),
@@ -95,7 +101,7 @@ class GenreDetailScreen extends StatelessWidget {
                                 ),
                                 child: Image.asset(
                                   // 'https://via.placeholder.com/300/${genre.color.value.toRadixString(16).substring(2)}/FFFFFF?text=Playlist+${index + 1}',
-                                  'assets/images/playlist.jpeg',
+                                  'assets/images/playlist.png',
                                   height: 120,
                                   width: double.infinity,
                                   fit: BoxFit.cover,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:only_vocal/components/colors.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -8,9 +9,9 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _notificationsEnabled = true;
-  bool _downloadOnWifiOnly = true;
-  String _audioQuality = 'High';
+  final bool _notificationsEnabled = true;
+  final bool _downloadOnWifiOnly = true;
+  final String _audioQuality = 'High';
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Text(
                 'Account Settings',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: const Color(0xFFFFD700),
+                      color: AppColors.primary,
                     ),
               ),
               const SizedBox(height: 16),
@@ -112,7 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Text(
                 'About',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: const Color(0xFFFFD700),
+                      color: AppColors.primary,
                     ),
               ),
               const SizedBox(height: 16),
@@ -162,7 +163,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: isDestructive ? Colors.red.withOpacity(0.2) : const Color(0xFF1A1E3F),
+          color: isDestructive ? Colors.red.withOpacity(0.2) : AppColors.background,
+          border: Border.all(color: AppColors.primary),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Icon(
@@ -206,7 +208,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: const Color(0xFF1A1E3F),
+          color: AppColors.background,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Icon(
@@ -221,7 +223,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       trailing: Switch(
         value: value,
         onChanged: onChanged,
-        activeColor: const Color(0xFFFFD700),
+        activeColor: AppColors.primary,
       ),
     );
   }
@@ -240,7 +242,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: const Color(0xFF1A1E3F),
+          color: AppColors.background,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Icon(
@@ -263,7 +265,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         underline: Container(
           height: 0,
         ),
-        dropdownColor: const Color(0xFF1A1E3F),
+        dropdownColor: AppColors.background,
         onChanged: onChanged,
         items: options.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(

@@ -1,6 +1,6 @@
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:only_vocal/components/colors.dart';
 import 'package:only_vocal/models/song.dart';
 
 class MusicAppScreen extends StatefulWidget {
@@ -79,8 +79,11 @@ class _MusicAppScreenState extends State<MusicAppScreen> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFF1A1E3F),
-                Theme.of(context).scaffoldBackgroundColor,
+                // const Color(0xFF1A1E3F),
+                // Theme.of(context).colorScheme.primary,
+                // Theme.of(context).scaffoldBackgroundColor,
+                AppColors.primary, // Use AppColors.surface or a custom dark color 
+                AppColors.background, 
               ],
             ),
           ),
@@ -170,7 +173,7 @@ class _MusicAppScreenState extends State<MusicAppScreen> {
                           IconButton(
                             icon: Icon(
                               _isLiked ? Icons.favorite : Icons.favorite_border,
-                              color: _isLiked ? const Color(0xFFE6AD05) : Colors.white,
+                              color: _isLiked ? AppColors.primary : Colors.white,
                               size: 28,
                             ),
                             onPressed: () {
@@ -194,7 +197,7 @@ class _MusicAppScreenState extends State<MusicAppScreen> {
                             onChanged: (value) {
                               _audioPlayer.seek(Duration(seconds: value.toInt()));
                             },
-                            activeColor: const Color(0xFFE6AD05),
+                            activeColor: AppColors.primary,
                             inactiveColor: Colors.white.withOpacity(0.3),
                           ),
                           Row(
@@ -228,7 +231,7 @@ class _MusicAppScreenState extends State<MusicAppScreen> {
                             width: 64,
                             height: 64,
                             decoration: const BoxDecoration(
-                              color: Color(0xFFE6AD05),
+                              color: AppColors.primary,
                               shape: BoxShape.circle,
                             ),
                             child: IconButton(

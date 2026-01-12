@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:only_vocal/resources/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:only_vocal/components/colors.dart';
 
 class RatingScreen extends StatefulWidget {
   const RatingScreen({super.key});
@@ -109,7 +109,8 @@ void _submitReview() async {
     return IconButton(
       icon: Icon(
         index <= _rating ? Icons.star : Icons.star_border,
-        color: Colors.amber,
+        // color: Colors.amber,
+         color: AppColors.primary,
         size: 36,
       ),
       onPressed: () {
@@ -128,7 +129,7 @@ void _submitReview() async {
             fontWeight: FontWeight.bold,
             color: Colors.white, // Optional: ensures it's visible on dark backgrounds
           ),
-        backgroundColor: const Color(0xFF1A1E3F),
+        backgroundColor: AppColors.background,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
