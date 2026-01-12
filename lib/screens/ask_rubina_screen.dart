@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:only_vocal/components/colors.dart';
 
-class AskAbdulScreen extends StatefulWidget {
-  const AskAbdulScreen({super.key});
+class AskRubinaScreen extends StatefulWidget {
+  const AskRubinaScreen({super.key});
 
   @override
-  State<AskAbdulScreen> createState() => _AskAbdulScreenState();
+  State<AskRubinaScreen> createState() => _AskRubinaScreenState();
 }
 
-class _AskAbdulScreenState extends State<AskAbdulScreen> {
+class _AskRubinaScreenState extends State<AskRubinaScreen> {
   final TextEditingController _messageController = TextEditingController();
   final List<String> _messages = [];
   final ScrollController _scrollController = ScrollController();
@@ -43,16 +44,20 @@ class _AskAbdulScreenState extends State<AskAbdulScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      // backgroundColor: const Color(0xFF121212),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text(
-          'Ask Abdul',
-          style: GoogleFonts.roboto(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          'Ask Rubina',
+          // style: GoogleFonts.roboto(
+          //   color: Colors.white,
+          //   fontWeight: FontWeight.bold,
+          // ),
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
-        backgroundColor: const Color(0xFF1A1E3F),
+        // backgroundColor: const Color(0xFF1A1E3F),
+        // backgroundColor: const Color(0xFF05152E),
+        backgroundColor: AppColors.background,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -63,7 +68,9 @@ class _AskAbdulScreenState extends State<AskAbdulScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: const BoxDecoration(
-              color: Color(0xFF1A1E3F),
+              // color: Color(0xFF1A1E3F),
+              // color: Color(0xFF05152E),
+                color: AppColors.background,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -76,11 +83,13 @@ class _AskAbdulScreenState extends State<AskAbdulScreen> {
                   children: [
                     CircleAvatar(
                       radius: 40,
-                      backgroundColor: const Color(0xFFFFD700),
+                      // backgroundColor: const Color(0xFFFFD700),
+                      // backgroundColor: const Color(0xFF2B90CA),
+                      backgroundColor: AppColors.primary,
                       child: Icon(
                         Icons.person,
                         size: 40,
-                        color: const Color(0xFF1A1E3F),
+                        color: AppColors.background,
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -88,7 +97,7 @@ class _AskAbdulScreenState extends State<AskAbdulScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Abdul',
+                          'Rubina',
                           style: GoogleFonts.roboto(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -116,7 +125,9 @@ class _AskAbdulScreenState extends State<AskAbdulScreen> {
                     color: Colors.white.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: const Color(0xFFFFD700).withOpacity(0.3),
+                      // color: const Color(0xFFFFD700).withOpacity(0.3),
+                      // color: const Color(0xFF2B90CA).withOpacity(0.3),
+                      color: AppColors.primary.withOpacity(0.3),
                     ),
                   ),
                   child: Text(
@@ -153,14 +164,17 @@ class _AskAbdulScreenState extends State<AskAbdulScreen> {
                                   vertical: 12,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFFFD700),
+                                  // color: const Color(0xFFFFD700),
+                                  // color: const Color(0xFF2B90CA),
+                                  color: AppColors.primary,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
                                   _messages[index],
                                   style: GoogleFonts.roboto(
                                     fontSize: 16,
-                                    color: const Color(0xFF121212),
+                                    // color: const Color(0xFF121212),
+                                    color: AppColors.background,
                                   ),
                                 ),
                               ),
@@ -176,7 +190,8 @@ class _AskAbdulScreenState extends State<AskAbdulScreen> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: const BoxDecoration(
-              color: Color(0xFF1A1E3F),
+              // color: Color(0xFF1A1E3F),
+              color: AppColors.background,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
@@ -190,7 +205,9 @@ class _AskAbdulScreenState extends State<AskAbdulScreen> {
                       color: Colors.white.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(
-                        color: const Color(0xFFFFD700).withOpacity(0.3),
+                        // color: const Color(0xFFFFD700).withOpacity(0.3),
+                        // color: const Color(0xFF2B90CA).withOpacity(0.3),
+                        color: AppColors.primary.withOpacity(0.3),
                       ),
                     ),
                     child: TextField(
@@ -220,12 +237,16 @@ class _AskAbdulScreenState extends State<AskAbdulScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(15),
                     decoration: const BoxDecoration(
-                      color: Color(0xFFFFD700),
+                      // color: Color(0xFFFFD700),
+                      // color: Color(0xFF2B90CA),
+                      color: AppColors.primary,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
                       Icons.send,
-                      color: Color(0xFF121212),
+                      // color: Color(0xFF121212),
+                      // color: Color(0xFF05152E),
+                      color: AppColors.background,
                       size: 20,
                     ),
                   ),

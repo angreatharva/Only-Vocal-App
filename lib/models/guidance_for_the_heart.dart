@@ -4,7 +4,7 @@ import 'guidance_category.dart';
 class GuidanceForTheHeart {
   final String id;
   final String name;
-  final Color color;
+  final Color? color;
   final IconData icon;
   final String imageUrl;
   final List<String> videoUrls; // optional direct videos (unused if categories present)
@@ -13,7 +13,7 @@ class GuidanceForTheHeart {
   GuidanceForTheHeart({
     required this.id,
     required this.name,
-    required this.color,
+    this.color,
     required this.icon,
     required this.imageUrl,
     required this.videoUrls,

@@ -1,23 +1,19 @@
 
 import 'package:only_vocal/firebase_options.dart';
-import 'package:only_vocal/models/song.dart';
 import 'package:only_vocal/resources/user_provider.dart';
-import 'package:only_vocal/resources/auth_methods.dart';
-import 'package:only_vocal/screens/auth_screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:only_vocal/screens/ask_abdul_screen.dart';
+import 'package:only_vocal/screens/ask_rubina_screen.dart';
 import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
-import 'screens/search_screen.dart';
 import 'screens/videos_screen.dart';
 import 'screens/library_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/splash_screen.dart';
+import 'components/colors.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,13 +73,24 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        primaryColor: const Color(0xFF1A1E3F),
-        scaffoldBackgroundColor: const Color(0xFF121212),
-        colorScheme: const ColorScheme.dark(
-          primary: Color(0xFFFFD700),
-          secondary: Color(0xFFFFD700),
-          background: Color(0xFF121212),
-          surface: Color(0xFF1A1E3F),
+        // primaryColor: const Color(0xFF1A1E3F),
+        // scaffoldBackgroundColor: const Color(0xFF121212),
+
+        primaryColor: AppColors.primary,
+        scaffoldBackgroundColor: AppColors.background,
+
+
+        // colorScheme: const ColorScheme.dark(
+        //   // primary: Color(0xFFFFD700),
+        //   primary: Color(0xFF2B90CA),
+        //   // secondary: Color(0xFFFFD700),
+        //   secondary: Color(0xFFFCFCFC),
+        //   // surface: Color(0xFF1A1E3F),
+        //   surface: Color(0xFF05152E),'
+          colorScheme: ColorScheme.dark(
+          primary: AppColors.primary,
+          secondary: AppColors.secondary,
+          surface: AppColors.surface,
         ),
         textTheme: TextTheme(
           displayLarge: GoogleFonts.roboto(
@@ -133,7 +140,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
         cardTheme: CardTheme(
-          color: const Color(0xFF1A1E3F),
+          // color: const Color(0xFF1A1E3F),
+          // color: const Color(0xFF05152E),
+          color: AppColors.surface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -141,8 +150,12 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFFFD700),
-            foregroundColor: const Color(0xFF121212),
+            // backgroundColor: const Color(0xFFFFD700),
+            // foregroundColor: const Color(0xFF121212),
+            // backgroundColor: const Color(0xFF2B90CA),
+            // foregroundColor: const Color(0xFF05152E),
+            backgroundColor: AppColors.primary,
+            foregroundColor: AppColors.surface,
             textStyle: GoogleFonts.roboto(
               fontWeight: FontWeight.w300,
               fontSize: 14,
@@ -186,7 +199,7 @@ class _MainScreenState extends State<MainScreen> {
     const LibraryScreen(),
     const VideosScreen(),
     
-    const AskAbdulScreen(),
+    const AskRubinaScreen(),
     ProfileScreen(),
   ];
 
@@ -219,9 +232,19 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color.fromARGB(255, 40, 44, 85),
-        selectedItemColor: const Color(0xFFFFD700),
+        // backgroundColor: const Color.fromARGB(255, 40, 44, 85),
+        // backgroundColor: const Color(0xFF05152E),
+        // selectedItemColor: const Color(0xFFFFD700),
+        // selectedItemColor: const Color(0xFF2B90CA),
+        // unselectedItemColor: Colors.white.withOpacity(0.6),
+        // selectedItemColor: const Color(0xFFFFD700),
+        // selectedItemColor: const Color(0xFF2B90CA),
+        // unselectedItemColor: Colors.white.withOpacity(0.6),
+        // unselectedItemColor: const Color(0xFF05152E),
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.white.withOpacity(0.6),
+
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -237,7 +260,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline),
-            label: 'Ask Abdul',
+            label: 'Ask Rubina',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

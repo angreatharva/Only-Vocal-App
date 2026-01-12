@@ -1,15 +1,11 @@
-import 'dart:typed_data';
 
 import 'package:only_vocal/components/colors.dart';
 import 'package:only_vocal/components/text_field_input.dart';
 import 'package:only_vocal/components/utils.dart';
 import 'package:only_vocal/main.dart';
-import 'package:only_vocal/models/song.dart';
 import 'package:only_vocal/resources/auth_methods.dart';
-import 'package:only_vocal/screens/home_screen.dart';
 import 'package:only_vocal/screens/auth_screens/login.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

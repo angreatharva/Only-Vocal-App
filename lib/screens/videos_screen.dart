@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../data/mock_data.dart';
 import '../models/guidance_for_the_heart.dart';
 import 'guidance_for_the_heart_details.dart';
+import '../components/colors.dart';
 
 class VideosScreen extends StatelessWidget {
   const VideosScreen({super.key});
@@ -11,9 +12,14 @@ class VideosScreen extends StatelessWidget {
     final List<GuidanceForTheHeart> items = MockData.guidanceForTheHeart;
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Videos'),
-        backgroundColor: const Color(0xFF1A1E3F),
+        title: Text(
+          'Videos',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        // backgroundColor: const Color(0xFF1A1E3F),
+        backgroundColor: AppColors.background,
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
@@ -45,7 +51,8 @@ class _GuidanceCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => GuidanceForTheHeartDetails(guidanceForTheHeart: item),
+            builder: (context) =>
+                GuidanceForTheHeartDetails(guidanceForTheHeart: item),
           ),
         );
       },
@@ -56,8 +63,8 @@ class _GuidanceCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              item.color,
-              item.color.withOpacity(0.7),
+              item.color ?? Colors.transparent,
+              (item.color ?? Colors.transparent).withOpacity(0.7),
             ],
           ),
           boxShadow: [
@@ -87,7 +94,8 @@ class _GuidanceCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.play_circle_fill, size: 32, color: Colors.white.withOpacity(0.9)),
+                  Icon(Icons.play_circle_fill,
+                      size: 32, color: Colors.white.withOpacity(0.9)),
                   const Spacer(),
                   Text(
                     item.name,

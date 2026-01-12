@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:only_vocal/components/colors.dart';
 import '../main.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,26 +19,35 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   final List<_OnboardPage> _pages = const [
     _OnboardPage(
-      title: 'Qalberooh – Pure Voices. Pure Soul',
-      subtitle: '',
-    ),
-    _OnboardPage(
-      title: 'Halal Listening, Heartfelt Experience.',
-      subtitle: '',
-    ),
-    _OnboardPage(
-      title: 'Inspiring Souls with Voices, Not Instruments.',
-      subtitle: '',
-    ),
-    _OnboardPage(
-      title: 'Your space for peaceful sound.',
-      subtitle: '',
-    ),
-    _OnboardPage(
+      // title: 'Qalberooh – Pure Voices. Pure Soul',
+      // subtitle: '',
       title: '',
       subtitle: '',
-      imageAsset: 'assets/images/Qalberooh.jpg',
+      imageAsset: 'assets/images/Qalberooh.png'
     ),
+    _OnboardPage(
+      // title: 'Halal Listening, Heartfelt Experience.',
+      title: '',
+      subtitle: '',
+      imageAsset: 'assets/images/Halal.png'
+    ),
+    _OnboardPage(
+      // title: 'Inspiring Souls with Voices, Not Instruments.',
+      title: '',
+      subtitle: '',
+      imageAsset: 'assets/images/Inspiring.png'
+    ),
+    _OnboardPage(
+      // title: 'Your space for peaceful sound.',
+      title: '',
+      subtitle: '',
+      imageAsset: 'assets/images/Space.png'
+    ),
+    // _OnboardPage(
+    //   title: '',
+    //   subtitle: '',
+    //   imageAsset: 'assets/images/Qalberooh.jpg',
+    // ),
   ];
 
   @override
@@ -84,6 +94,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
+        // backgroundColor: const Color(0xFF05152E), 
       body: SafeArea(
         child: Stack(
           children: [
@@ -98,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               itemBuilder: (context, index) {
                 final p = _pages[index];
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 2.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -120,7 +131,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                       textAlign: TextAlign.center,
                                       style: theme.textTheme.displayMedium?.copyWith(
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                        // color: Colors.white,
+                                        // color: const Color(0xFF8367F4),
+                                        // color: const Color(0xFFFCFCFC),
+                                        color: AppColors.primary,
                                       ),
                                     ),
                                   ),
@@ -131,7 +145,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                 children: [
                                   LayoutBuilder(
                                     builder: (context, constraints) {
-                                      final double height = MediaQuery.of(context).size.height * 0.6;
+                                      final double height = MediaQuery.of(context).size.height * 0.8;
                                       return FadeTransition(
                                         opacity: _fadeIn,
                                         child: SlideTransition(
@@ -155,9 +169,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                                       child: Column(
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         children: const [
-                                                          Icon(Icons.broken_image, color: Colors.white54, size: 48),
+                                                          Icon(Icons.broken_image, color: AppColors.primary, size: 48),
                                                           SizedBox(height: 8),
-                                                          Text('Image not found', style: TextStyle(color: Colors.white70)),
+                                                          Text('Image not found', style: TextStyle(color: AppColors.primary)),
                                                         ],
                                                       ),
                                                     );
@@ -183,7 +197,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                             p.subtitle,
                             textAlign: TextAlign.center,
                             style: theme.textTheme.titleLarge?.copyWith(
-                              color: Colors.white70,
+                              color: AppColors.primary,
                             ),
                           ),
                         ),
@@ -226,7 +240,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         width: _currentPage == i ? 18 : 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: _currentPage == i ? const Color(0xFFFFD700) : Colors.white24,
+                          // color: _currentPage == i ? const Color(0xFFFFD700) : Colors.white24,
+                          color: _currentPage == i ? AppColors.primary : Colors.white24,
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
@@ -243,8 +258,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                             key: const ValueKey('next'),
                             onPressed: _onNext,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFFD700),
-                              foregroundColor: const Color(0xFF121212),
+                              // backgroundColor: const Color(0xFFFFD700),
+                              backgroundColor: AppColors.primary,
+                              foregroundColor: AppColors.background,
                               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             ),
@@ -254,8 +270,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                             key: const ValueKey('okay'),
                             onPressed: _goToHome,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFFD700),
-                              foregroundColor: const Color(0xFF121212),
+                              // backgroundColor: const Color(0xFFFFD700),
+                              // backgroundColor: const Color(0xFF2B90CA),
+                              backgroundColor: AppColors.primary,
+                              foregroundColor: AppColors.background,
                               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             ),

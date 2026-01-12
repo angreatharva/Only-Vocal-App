@@ -13,6 +13,7 @@ import 'full_player_screen.dart';
 import 'guidance_for_the_heart_details.dart';
 import 'search_screen.dart';
 import 'features_screen.dart';
+import '../components/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -41,16 +42,23 @@ if (customUser != null) {
 print('Doneeee');
 
     return Scaffold(
+      // backgroundColor: const Color(0xFF05152E),
+      // backgroundColor: const Color(0xFFFCFCFC),
+      backgroundColor: AppColors.background, 
       appBar: AppBar(
+        // backgroundColor: const Color(0xFF05152E),
+        backgroundColor: AppColors.background, 
         title: Text(
           'Qalberooh',
           style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                color: const Color.fromARGB(255, 156, 98, 167),
+                // color: const Color.fromARGB(255, 156, 98, 167),
+                // color: const Color(0xFFFCFCFC),
+                color: AppColors.primary, 
               ),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(Icons.search, color: AppColors.primary),
             onPressed: () {
               Navigator.push(
                 context,
@@ -113,7 +121,9 @@ print('Doneeee');
                       child: Text(
                         'View All',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: const Color(0xFFFFD700),
+                              // color: const Color(0xFF2B90CA),
+                              // color: const Color(0xFFFCFCFC),
+                              color: AppColors.primary,
                               fontWeight: FontWeight.w500,
                             ),
                       ),
@@ -251,7 +261,8 @@ print('Doneeee');
   }
   Widget buildImage(String carouselImage,int index)=>Container(
     margin:EdgeInsets.symmetric(horizontal:8),
-    color:Colors.grey,
+    // color:Colors.grey,
+    color: AppColors.darkGray,
     child:Image.asset(
       carouselImage,
       fit:BoxFit.cover,
@@ -265,12 +276,16 @@ print('Doneeee');
           width: 64,
           height: 64,
           decoration: BoxDecoration(
-            color: const Color(0xFF1A1E3F),
+            // color: const Color(0xFF1A1E3F),
+            // color: const Color(0xFF082149),
+            // color: const Color(0xFF2B90CA),
+            color: AppColors.primary, 
             shape: BoxShape.circle,
           ),
           child: Icon(
             icon,
-            color: Colors.white,
+            color: AppColors.background,
+            // color: const Color(0xFF05152E),
             size: 28,
           ),
         ),
@@ -282,8 +297,10 @@ print('Doneeee');
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
+            // style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            //       color: Colors.white.withOpacity(0.9),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white.withOpacity(0.9),
+                  color: AppColors.textPrimary, 
                 ),
           ),
         ),
@@ -324,9 +341,12 @@ print('Doneeee');
             ),
             Text(
               song.artist,
+              // style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              //       color: Colors.white.withOpacity(0.7),
+              //     ),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white.withOpacity(0.7),
-                  ),
+              color: AppColors.lightGray,
+            ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -353,8 +373,8 @@ print('Doneeee');
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              genre.color,
-              genre.color.withOpacity(0.7),
+              genre.color ?? Colors.transparent,
+              (genre.color ?? Colors.transparent).withOpacity(0.7),
             ],
           ),
           boxShadow: [
@@ -423,8 +443,8 @@ print('Doneeee');
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              guidanceForTheHeartList.color,
-              guidanceForTheHeartList.color.withOpacity(0.7),
+              guidanceForTheHeartList.color ?? Colors.transparent,
+              (guidanceForTheHeartList.color ?? Colors.transparent).withOpacity(0.7),
             ],
           ),
           boxShadow: [
@@ -522,7 +542,8 @@ print('Doneeee');
             child: const Center(
               child: Icon(
                 Icons.arrow_forward,
-                color: Color(0xFFFFD700),
+                // color: Color(0xFFFFD700),
+                color: Color(0xFF2B90CA),
                 size: 32,
               ),
             ),

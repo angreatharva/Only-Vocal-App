@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:only_vocal/resources/user_provider.dart';
 import 'package:only_vocal/screens/auth_screens/login.dart';
 import 'package:only_vocal/screens/rating_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart' as ModelUser;
 import 'settings_screen.dart';
+import 'package:only_vocal/components/colors.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -15,6 +15,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ModelUser.User? customUser = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -30,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 60,
-                        backgroundColor: const Color(0xFF1A1E3F),
+                        backgroundColor: AppColors.background,
                         backgroundImage: AssetImage('assets/images/person.png'),
                       ),
                       // Positioned(
@@ -63,12 +64,12 @@ class ProfileScreen extends StatelessWidget {
                 // Username
                 Text(
                   // 'Username',
-                  customUser != null ? '${customUser.username}' : 'User',
+                  customUser != null ? customUser.username : 'User',
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
                 
                 Text(
-                  customUser != null ? '${customUser.email}' : 'user@example.com',
+                  customUser != null ? customUser.email : 'user@example.com',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.white.withOpacity(0.7),
                       ),
@@ -111,7 +112,8 @@ class ProfileScreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1A1E3F),
+                    color: AppColors.background,
+                    // color: const Color.fromARGB(255, 156, 98, 167),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
@@ -201,7 +203,7 @@ class ProfileScreen extends StatelessWidget {
           Text(
             value,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: const Color(0xFFFFD700),
+                  color: AppColors.primary,
                   fontWeight: FontWeight.bold,
                 ),
           ),

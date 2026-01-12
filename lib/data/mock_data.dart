@@ -3,27 +3,28 @@ import '../models/guidance_for_the_heart.dart';
 import '../models/guidance_category.dart';
 import '../models/song.dart';
 import '../models/genre.dart';
+import '../components/colors.dart';
 
 class MockData {
   static Map<String, String> videoTitles = {
     // 'https://youtu.be/ITarXSw7Zhg?si=j_KfkIVrfMNuL78n': 'Example title here',
   };
   static List<Song> recentlyPlayed = [
-  Song(
-    id: 0,
-    title: 'Levitating',
-    artist: 'Dua Lipa',
-    album: 'Future Nostalgia',
-    albumArt: 'assets/thumbnails/levitating.jpeg',
-    audioURL: 'audio/levitating.mp3',
-    isLiked: true,
-  ),
+  // Song(
+  //   id: 0,
+  //   title: 'Levitating',
+  //   artist: 'Dua Lipa',
+  //   album: 'Future Nostalgia',
+  //   albumArt: 'assets/thumbnails/levitating.jpeg',
+  //   audioURL: 'audio/levitating.mp3',
+  //   isLiked: true,
+  // ),
   Song(
     id: 1,
     title: 'As It Was',
     artist: 'Harry Styles',
     album: 'Harry’s House',
-    albumArt: 'assets/thumbnails/as_it_was.jpeg',
+    albumArt: 'assets/thumbnails/As_it_was.jpg',
     audioURL: 'audio/as-it-was.mp3',
   ),
   Song(
@@ -31,7 +32,7 @@ class MockData {
     title: 'Shake It Off',
     artist: 'Taylor Swift',
     album: '1989',
-    albumArt: 'assets/thumbnails/shake_it_off.jpeg',
+    albumArt: 'assets/thumbnails/Shake_It_Off.png',
     audioURL: 'audio/levitating.mp3',
   ),
   Song(
@@ -198,22 +199,24 @@ static List<Song> likedSongs = [
     Genre(
       id: 'bollywood',
       name: 'Bollywood',
-      color: Colors.green,
+      // color: Colors.green,
       icon: Icons.album,
-      imageUrl: 'assets/genres/country.jpeg',
+      imageUrl: 'assets/genres/Bollywood.png',
+      // imageUrl: 'assets/genres/country.jpeg',
     ),
     Genre(
       id: 'hollywood',
       name: 'Hollywood',
-      color: Colors.red,
+      // color: Colors.red,
       icon: Icons.album,
-      imageUrl: 'assets/genres/electronic.jpeg',
+      // imageUrl: 'assets/genres/electronic.jpeg',
+      imageUrl: 'assets/genres/Hollywood.png',
     ),Genre(
       id: 'artist',
       name: 'Artist',
-      color: Colors.blue,
+      // color: Colors.blue,
       icon: Icons.album,
-      imageUrl: 'assets/genres/rap.png',
+      imageUrl: 'assets/genres/Artist.png',
     ),
   ];
 
@@ -221,9 +224,10 @@ static List<Song> likedSongs = [
     GuidanceForTheHeart(
       id: 'islamic_lectures',
       name: 'Islamic Lectures' ,
-      color: Colors.lightGreen,
+      // color: Colors.lightGreen,
       icon: Icons.album,
-      imageUrl: 'assets/genres/electronic.jpeg',
+      // imageUrl: 'assets/genres/electronic.jpeg',
+      imageUrl: 'assets/genres/Lectures.png',
       videoUrls: [
         'https://youtu.be/ITarXSw7Zhg?si=j_KfkIVrfMNuL78n',
         'https://youtu.be/arp0eBn1nG8?si=vbNb1s-JD56TuX6x',
@@ -235,9 +239,10 @@ static List<Song> likedSongs = [
     GuidanceForTheHeart(
       id: 'little_muslim',
       name: 'Little Muslim',
-      color: Colors.yellow,
+      // color: Colors.yellow,
       icon: Icons.album,
-      imageUrl: 'assets/genres/jazz.jpeg',
+      // imageUrl: 'assets/genres/jazz.jpeg',
+      imageUrl: 'assets/genres/Muslim.png',
       videoUrls: [],
       categories: [
         GuidanceCategory(
@@ -285,9 +290,11 @@ static List<Song> likedSongs = [
     GuidanceForTheHeart(
       id: 'islamicLifestyle',
       name: 'Islamic Lifestyle',
-      color: Colors.blue,
+      // color: AppColors.primary,
+      // color: Colors.blue,
       icon: Icons.album,
-      imageUrl: 'assets/genres/pop.png',
+      // imageUrl: 'assets/genres/pop.png',
+      imageUrl: 'assets/genres/Lifestyle.png',
       videoUrls: [],
       categories: [
         GuidanceCategory(
@@ -323,7 +330,7 @@ static List<Song> likedSongs = [
         artist: 'Artist ${index % 5 + 1}',
         album: 'Album ${index % 3 + 1}',
         // albumArt: 'https://via.placeholder.com/300/1A1E3F/FFFFFF?text=Song+${index + 1}',
-        albumArt: 'assets/images/song.jpeg',
+        albumArt: 'assets/images/song.png',
         audioURL: 'audio/levitating.mp3',
         isLiked: index % 3 == 0,
       ),

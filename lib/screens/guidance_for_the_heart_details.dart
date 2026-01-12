@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:only_vocal/components/colors.dart';
 
 import '../data/mock_data.dart';
-import '../models/genre.dart';
 import '../models/guidance_for_the_heart.dart';
 import '../models/guidance_category.dart';
 import 'webview_screen.dart';
@@ -125,7 +125,7 @@ class _GuidanceForTheHeartDetailsState extends State<GuidanceForTheHeartDetails>
           MaterialPageRoute(
             builder: (context) => _CategoryDetailsScreen(
               title: cat.name,
-              color: widget.guidanceForTheHeart.color,
+              color: widget.guidanceForTheHeart.color ?? Colors.transparent,
               fallbackImage: widget.guidanceForTheHeart.imageUrl,
               videoUrls: cat.videoUrls,
             ),
@@ -139,8 +139,8 @@ class _GuidanceForTheHeartDetailsState extends State<GuidanceForTheHeartDetails>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              widget.guidanceForTheHeart.color,
-              widget.guidanceForTheHeart.color.withOpacity(0.7),
+              widget.guidanceForTheHeart.color ?? Colors.transparent,
+              (widget.guidanceForTheHeart.color ?? Colors.transparent).withOpacity(0.7),
             ],
           ),
           boxShadow: [
@@ -185,7 +185,7 @@ class _GuidanceForTheHeartDetailsState extends State<GuidanceForTheHeartDetails>
   Widget _buildVideoTile(BuildContext context, String url, int index) {
     return _YouTubeTile(
       url: url,
-      color: widget.guidanceForTheHeart.color,
+      color: widget.guidanceForTheHeart.color ?? Colors.transparent,
       fallbackImage: widget.guidanceForTheHeart.imageUrl,
     );
   }
@@ -351,8 +351,11 @@ class _YouTubeTileState extends State<_YouTubeTile> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1A1E3F),
+        // color: const Color(0xFF1A1E3F),
+        color: AppColors.background,
+        // color: AppColors.primary,
         borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.primary),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),

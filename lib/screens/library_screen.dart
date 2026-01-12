@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/mock_data.dart';
-import 'full_player_screen.dart';
+import '../components/colors.dart';
+
 
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
@@ -27,17 +28,21 @@ class _LibraryScreenState extends State<LibraryScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
+        backgroundColor: AppColors.background,
         title: Text(
           'Your Library',
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         bottom: TabBar(
           controller: _tabController,
-          indicatorColor: const Color(0xFFFFD700),
-          labelColor: const Color(0xFFFFD700),
+          // indicatorColor: const Color(0xFFFFD700),
+          indicatorColor: AppColors.primary,
+          // labelColor: const Color(0xFFFFD700),
+          labelColor: AppColors.primary,
           unselectedLabelColor: Colors.white,
           tabs: const [
             Tab(text: 'Playlists'),
@@ -63,27 +68,27 @@ class _LibraryScreenState extends State<LibraryScreen> with SingleTickerProvider
       {
         'name': 'Liked Songs',
         'count': MockData.likedSongs.length,
-        'image': 'assets/images/playlist.jpeg',
+        'image': 'assets/images/playlist.png',
       },
       {
         'name': 'Workout Mix',
         'count': 25,
-        'image': 'assets/images/playlist.jpeg',
+        'image': 'assets/images/playlist.png',
       },
       {
         'name': 'Chill Vibes',
         'count': 42,
-        'image': 'assets/images/playlist.jpeg',
+        'image': 'assets/images/playlist.png',
       },
       {
         'name': 'Road Trip',
         'count': 18,
-        'image': 'assets/images/playlist.jpeg',
+        'image': 'assets/images/playlist.png',
       },
       {
         'name': 'Party Anthems',
         'count': 30,
-        'image': 'assets/images/playlist.jpeg',
+        'image': 'assets/images/playlist.png',
       },
     ];
 
@@ -136,9 +141,8 @@ class _LibraryScreenState extends State<LibraryScreen> with SingleTickerProvider
         return ListTile(
           leading: CircleAvatar(
             radius: 28,
-            backgroundImage: NetworkImage(
-              'https://via.placeholder.com/300/1A1E3F/FFFFFF?text=${artistName.split(' ')[0]}',
-            ),
+            backgroundImage: AssetImage('assets/images/artist.png'),
+              // 'https://via.placeholder.com/300/1A1E3F/FFFFFF?text=${artistName.split(' ')[0]}',
           ),
           title: Text(
             artistName,

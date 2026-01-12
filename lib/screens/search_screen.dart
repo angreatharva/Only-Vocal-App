@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:only_vocal/components/colors.dart';
 import '../data/mock_data.dart';
 import 'full_player_screen.dart';
 
@@ -52,8 +53,13 @@ class _SearchScreenState extends State<SearchScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1A1E3F),
+                  // color: const Color(0xFF1A1E3F),
+                  color: AppColors.background,
                   borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                    color: AppColors.primary, // Set your desired border color here
+                    width: 2, // Optional: set border thickness
+                  ),
                 ),
                 child: TextField(
                   autofocus: true,
@@ -143,7 +149,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 IconButton(
                   icon: const Icon(
                     Icons.play_circle_filled,
-                    color: Color(0xFFFFD700),
+                    color: AppColors.primary,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -157,7 +163,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 IconButton(
                   icon: Icon(
                     result.isLiked ? Icons.favorite : Icons.favorite_border,
-                    color: result.isLiked ? const Color(0xFFFFD700) : Colors.white,
+                    color: result.isLiked ? AppColors.primary : Colors.white,
                   ),
                   onPressed: () {
                     // Toggle like status
